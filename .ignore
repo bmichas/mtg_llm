@@ -1,7 +1,4 @@
 data_download/MyDataMTGv2.json
 data_download/AllIdentifiers.json
 master_degree_env/
-masters_degree_env/
-*.pickle
-**.pickle
-data/
+
