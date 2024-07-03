@@ -2,6 +2,8 @@ import numpy as np
 from collections import OrderedDict
 import pickle
 import os
+from itertools import islice
+
 
 MTG_DATA_PATH = "data_download/MyDataMTGv2.json"
 MTG_DATA_JSON_ENCODING_PATH = "cards_and_encoding.pickle"
@@ -47,32 +49,36 @@ class MtgSimiliar:
         mtg_data = self.__get_data(mtg_data_path)
         same_type_mtg_cards = self.__get_cards_with_same_type(mtg_data,
                                                               card_name)
-        encoding1 = mtg_data[card_name]['encoding']
+        encoding1 = mtg_data[card_name]["encoding"]
         similiar_cards = {}
         for card in same_type_mtg_cards:
-            encoding2 = mtg_data[card]['encoding']
+            encoding2 = mtg_data[card]["encoding"]
             similarity = np.dot(encoding1, encoding2) \
                 / (np.linalg.norm(encoding1) * np.linalg.norm(encoding2))
 
             if similarity > self.similarity_threshold:
                 similiar_cards[card] = similarity
 
-            ordered_similarity = OrderedDict(sorted(similiar_cards.items()))
-            ordered_similiar_cards = list(ordered_similarity.keys())
+            ordered_similarity = OrderedDict(reversed(sorted(similiar_cards.items())))
 
-        ordered_similiar_cards.remove(card_name)
-        print("Card:", card_name)
-        print("Similiar card:",
-              ordered_similiar_cards[:self.similiar_cards])
+        if CARD_NAME in ordered_similarity:
+            ordered_similarity.pop(CARD_NAME)
+
+        for card in islice(ordered_similarity, self.similiar_cards):
+            print(f"Card:{card}, similarity:{ordered_similarity[card]}")    
 
 
 def main():
-    directory_path = 'data/'
-    files = [f for f in os.listdir(directory_path) if os.path.isfile(os.path.join(directory_path, f))]
+    directory_path = "data/"
+    files = [f for f in os.listdir(directory_path)
+             if os.path.isfile(os.path.join(directory_path, f))]
+
     mtg_similar = MtgSimiliar()
     for file in files:
+        directory_path = "data/" + file
         print("Model:", file)
-        mtg_similar.find_similar_cards(CARD_NAME, directory_path + file)
+        mtg_similar.find_similar_cards(CARD_NAME, directory_path)
+        print("="*40)
 
 
 if __name__ == "__main__":
