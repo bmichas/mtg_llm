@@ -5,3 +5,6 @@ masters_degree_env/
 *.pickle
 **.pickle
 data/
+models/
+models_copy/
+logs/

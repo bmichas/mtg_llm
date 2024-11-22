@@ -24,7 +24,7 @@ def load_dataset(path):
 def prepare_tokenizer(descriptions):
     tokenizer = Tokenizer(char_level=True,
                           lower=True,
-                          filters='!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n',)
+                          filters='!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n')
     tokenizer.fit_on_texts(descriptions)
     return tokenizer
 
