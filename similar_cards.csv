@@ -1,0 +1,11 @@
+Model Name,Card Name,Similar Card 1,Similar Card 2,Similar Card 3,Similar Card 4,Similar Card 5,Similar Card 6,Similar Card 7,Similar Card 8,Similar Card 9,Similar Card 10
+lstm,Sol Ring,Sol Ring,Ur-Golem's Eye,Ur-Golem's Eye,Thran Dynamo,Wastes,Riverglide Pathway // Lavaglide Pathway,Riverglide Pathway // Lavaglide Pathway,Barkchannel Pathway // Tidechannel Pathway,Barkchannel Pathway // Tidechannel Pathway,Great Furnace
+lstm,Structural Assault,Structural Assault,Thrilling Encore,Urborg Justice,Fresh Meat,Faith's Reward,Second Sunrise,Let the Galaxy Burn,Fatal Push,Cradle to Grave,Force of Despair
+lstm,Crossbow Ambush,Silk Net,Vines of the Recluse,Shape the Sands,Crossbow Ambush,Silk Net,Gloomwidow's Feast,Spidery Grasp,Aim High,Treetop Defense,Aerial Volley
+lstm,Mephitic Draught,Metalspinner's Puzzleknot,Mephitic Draught,Infernal Idol,Skeletal Scrying,Cut of the Profits,Wooden Sphere,Tablet of Epityr,Urza's Chalice,Crystal Rod,Soul Net
+lstm,Sangromancer,Sangromancer,Bloodrite Invoker,Kalastria Highborn,Sanctum Seeker,Herald of the Pantheon,Acolyte of Aclazotz,High Fae Negotiator,Judge of Currents,Inspiring Cleric,Centaur Healer
+cnn_lstm,Sol Ring,Sol Ring,Ur-Golem's Eye,Ur-Golem's Eye,Thran Dynamo,Bloodstone Cameo,Seashell Cameo,Troll-Horn Cameo,Drake-Skull Cameo,Great Furnace,Wastes
+cnn_lstm,Structural Assault,Structural Assault,Let the Galaxy Burn,Mordor on the March,Fiery Encore,"All of History, All at Once",Empty the Warrens,Urban Evolution,Escape to the Wilds,Flesh Allergy,Galvanic Relay
+cnn_lstm,Crossbow Ambush,Crossbow Ambush,Shape the Sands,Vines of the Recluse,Silk Net,Silk Net,Gloomwidow's Feast,Treetop Defense,Aim High,Spidery Grasp,Angelic Ascension
+cnn_lstm,Mephitic Draught,Metalspinner's Puzzleknot,Mephitic Draught,Infernal Idol,Profane Memento,Tithing Blade // Consuming Sepulcher,Thopter Foundry,Druidic Satchel,Ivory Crane Netsuke,Guild Globe,Sphere of the Suns
+cnn_lstm,Sangromancer,Sangromancer,Bloodrite Invoker,Kalastria Highborn,Shattered Angel,Herald of the Pantheon,Deathgreeter,Bog-Strider Ash,Guardian of Cloverdell,Blood Seeker,Bleak Coven Vampires

@@ -7,4 +7,5 @@ masters_degree_env/
 data/
 models/
 models_copy/
+models_colab/
 logs/
