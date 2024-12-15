@@ -1,20 +1,40 @@
+import numpy as np
 import pandas as pd
+import tensorflow as tf
+from tensorflow.keras.layers import Input, Embedding, LSTM, Dense, Dropout, Bidirectional, RepeatVector, Attention, Concatenate, Conv1D, MaxPooling1D, Concatenate, UpSampling1D, MultiHeadAttention, LayerNormalization, Add, GRU, Layer
+from tensorflow.keras.models import Model
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.callbacks import EarlyStopping
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.preprocessing import LabelEncoder
 import pickle
 import os
-import tensorflow as tf
-import numpy as np
+import datetime
+import time
+from datasets import load_dataset
 import json
-from sklearn.metrics.pairwise import cosine_similarity
-from tensorflow.keras.preprocessing.sequence import pad_sequences
-
 
 MTG_DATA_SET_PATH = 'data_download/MyDataMTGv2.json'
-TOKENIZER_PATH = "./models/tokenizer.pkl"
-MODELS_PATH = "./models"
+TOKENIZER_PATH = "./models_colab/tokenizer_transformer.pkl"
+MODELS_PATH = "./models_colab"
 OUTPUT_FILENAME = 'mtg_similar.csv'
-MODELS_NAMES = ["lstm"]
-QUERY_DESCRIPTIONS = ['Sol Ring', 'Structural Assault', 'Crossbow Ambush', 'Mephitic Draught', 'Sangromancer', 'Propaganda', 'Rhystic Study']
-MAX_LEN_NAME = 10 
+MODELS_NAMES = ["transformer"]
+QUERY_DESCRIPTIONS = ['Sol Ring', 
+                      'Structural Assault', 
+                      'Crossbow Ambush', 
+                      'Mephitic Draught', 
+                      'Sangromancer', 
+                      'Propaganda', 
+                      'Rhystic Study' , 
+                      'Sun Titan',
+                      'Diabolic Tutor',
+                      'Sublime Epiphany',
+                      'Rampant Growth',
+                      'Geist of Saint Traft',
+                      'Zap']
+
+MAX_LEN_NAME = 10
 MAX_LEN_DESCRIPTION = 50
 EMBEDDING_DIM = 512
 CARDS_TO_PREDICT = 50
@@ -32,7 +52,7 @@ def get_card_description(querry, card_names, card_descriptions):
     index = np.where(card_names == querry)[0]
     if index.size > 0:
         return card_descriptions[index][0]
-    
+
     return querry
 
 
@@ -93,15 +113,15 @@ def main():
             card_predictions = [MODELS_NAMES[i], query_description, mtg_json[query_description]["text"]]
             similar_cards = set(find_similar_cards(tokenizer, encoder, query_description, card_names, card_descriptions, card_embeddings, CARDS_TO_PREDICT))
             card_counter = 0
-            for desc, score in similar_cards:        
+            for desc, score in similar_cards:
                 card_name = get_card_name(desc, card_names, card_descriptions)
                 if card_name == query_description and (mtg_json[query_description]["types"][0] == mtg_json[card_name]["types"][0]):
                     continue
-                
+
                 if mtg_json[query_description]["types"][0] == mtg_json[card_name]["types"][0] or not(SAME_TYPE):
                     if card_counter == TOP_CARDS:
                         break
-                    
+
                     card = card_name + ": " + mtg_json[card_name]["text"]
                     card_predictions.append(card)
                     card_counter += 1

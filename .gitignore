@@ -1,5 +1,7 @@
 data_download/MyDataMTGv2.json
 data_download/AllIdentifiers.json
+data_download/25deck
+data_download/mtg_decks.pkl
 master_degree_env/
 masters_degree_env/
 *.pickle
